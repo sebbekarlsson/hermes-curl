@@ -43,7 +43,7 @@ size_t writefunc(void *ptr, size_t size, size_t nmemb, struct string *s)
 }
 
 
-AST_T* hcurl_get_option(AST_T* self, dynamic_list_T* args)
+AST_T* hcurl_get_option(runtime_T* runtime, AST_T* self, dynamic_list_T* args)
 {
     runtime_expect_args(args, 1, (int[]){ AST_STRING });
     AST_T* ast_string = (AST_T*) args->items[0];
@@ -62,7 +62,7 @@ AST_T* hcurl_get_option(AST_T* self, dynamic_list_T* args)
     }
 }
 
-AST_T* hcurl_easy_init(AST_T* self, dynamic_list_T* args)
+AST_T* hcurl_easy_init(runtime_T* runtime, AST_T* self, dynamic_list_T* args)
 {
     AST_T* curl_object = init_ast(AST_OBJECT);
     curl_object->object_value = (void*) curl_easy_init();
@@ -70,7 +70,7 @@ AST_T* hcurl_easy_init(AST_T* self, dynamic_list_T* args)
     return curl_object;
 }
 
-AST_T* hcurl_easy_setopt(AST_T* self, dynamic_list_T* args)
+AST_T* hcurl_easy_setopt(runtime_T* runtime, AST_T* self, dynamic_list_T* args)
 {
     runtime_expect_args(args, 3, (int[]){ AST_OBJECT, AST_INTEGER, AST_ANY });
 
@@ -93,7 +93,7 @@ AST_T* hcurl_easy_setopt(AST_T* self, dynamic_list_T* args)
     return init_ast(AST_NULL);
 }
 
-AST_T* hcurl_easy_perform(AST_T* self, dynamic_list_T* args)
+AST_T* hcurl_easy_perform(runtime_T* runtime, AST_T* self, dynamic_list_T* args)
 {
     runtime_expect_args(args, 1, (int[]){ AST_OBJECT });
 
@@ -116,7 +116,7 @@ AST_T* hcurl_easy_perform(AST_T* self, dynamic_list_T* args)
     return ast_string;
 }
 
-AST_T* hcurl_easy_cleanup(AST_T* self, dynamic_list_T* args)
+AST_T* hcurl_easy_cleanup(runtime_T* runtime, AST_T* self, dynamic_list_T* args)
 {
     runtime_expect_args(args, 1, (int[]){ AST_OBJECT });
 
